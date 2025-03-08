@@ -29,4 +29,4 @@ jobs:
         exit-code: 0  # Do not fail the pipeline, just show the warnings
 
     - name: Run Docker Container
-      run: sudo docker run -d -p 8080:8080 --name cicd-pipeline02-container isrerahmed17427/cicd-pipeline
+      run: sudo docker run -d -p 80:8080 --name cicd-pipeline02-container isrerahmed17427/cicd-pipeline
