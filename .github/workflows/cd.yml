@@ -17,5 +17,16 @@ jobs:
       run: sudo docker pull isrerahmed17427/cicd-pipeline02:latest
     - name: Delete Old docker container
       run: sudo docker rm -f cicd-pipeline02-container || true
+      
+    # :closed_lock_with_key: Security Scan with Trivy
+    - name: Security Scan with Trivy
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: "amitslab/cicd-pipeline:latest"
+        format: "table"
+        ignore-unfixed: true  # Ignore vulnerabilities that have no fixed version
+        severity: "HIGH,CRITICAL"  # Scan only high & critical vulnerabilities
+        exit-code: 0  # Do not fail the pipeline, just show the warnings
+
     - name: Run Docker Container
       run: sudo docker run -d -p 8080:8080 --name cicd-pipeline02-container isrerahmed17427/cicd-pipeline
